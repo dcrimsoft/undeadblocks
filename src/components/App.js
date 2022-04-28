@@ -88,7 +88,7 @@ class App extends Component {
 											<div className="card">
 												<h5 className="card_title">AMATEUR</h5>
 												
-												<img className="ban_i" src={ amateur_bg } />
+												<img className="ban_i" src={ amateur_bg } alt="amateur weapon loadout" />
 												<div className="d_container">
 													<h3 className="w_price" id="a_text">
 														0.1 ETH
@@ -112,9 +112,9 @@ class App extends Component {
 												<h5 className="card_title">
 													SURVIVOR
 												</h5>
-												<img className="ban_i" src={ survivor_bg } id="surv_img" />
+												<img className="ban_i" src={ survivor_bg } alt="survivor weapon loadout" id="surv_img" />
 												<div className="d_container" id='surv_d'>
-													<h3 className="w_price" >
+													<h3 className="w_price" id="survivor_text" >
 														0.3 ETH
 													</h3>
 													<p className="w_det">
@@ -133,9 +133,9 @@ class App extends Component {
 										<div className="the_images">
 											<div className="card">
 												<h5 className="card_title">ASSASSIN</h5>
-												<img className="ban_i" src={ assassin_bg }/>
+												<img className="ban_i" src={ assassin_bg } alt="assassin weapon loadout" />
 												<div className="d_container" id="ass_d">
-													<h3 className="w_price">
+													<h3 className="w_price" id="assassin_text">
 														0.5 ETH
 													</h3>
 													<p className="w_det">
@@ -156,9 +156,9 @@ class App extends Component {
 										<div className="the_images">
 											<div className="card">
 												<h5 className="card_title">ZOMBIE KILLER</h5>
-												<img className="ban_i" src={ z_killer } />
+												<img className="ban_i" src={ z_killer } alt="zombie killer weapon loadout" />
 												<div className="d_container" id="zombie_d">
-													<h3 className="w_price">
+													<h3 className="w_price" id="zkiller_text">
 														1 ETH
 													</h3>
 													<p className="w_det">

@@ -688,6 +688,29 @@ button:focus {
 font-size: 10px;
 }
 
+#a_text {
+	background-image: linear-gradient(60deg, #E21143, #FFB03A);
+    background-clip: text;
+    color: transparent;
+}
+
+#survivor_text {
+	background-image: linear-gradient(60deg, #fff, gray);
+    background-clip: text;
+    color: transparent;
+}
+
+#assassin_text {
+	background-image: linear-gradient(60deg, yellow, gray);
+    background-clip: text;
+    color: transparent;
+}
+
+#zkiller_text {
+	background-image: linear-gradient(60deg, #f0f0f0, skyblue);
+    background-clip: text;
+    color: transparent;
+}
 
 @media screen and (max-width: 1000px) {
 	.c_slider {
