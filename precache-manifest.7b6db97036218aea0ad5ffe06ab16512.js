@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "5b14d999bdbea06cfc5b",
-    "url": "/undeadblocks/static/css/main.d91c6438.chunk.css"
+    "revision": "9aa279865cd76c5b9069",
+    "url": "/undeadblocks/static/css/main.918f5075.chunk.css"
   },
   {
-    "revision": "5b14d999bdbea06cfc5b",
-    "url": "/undeadblocks/static/js/main.5b14d999.chunk.js"
+    "revision": "9aa279865cd76c5b9069",
+    "url": "/undeadblocks/static/js/main.9aa27986.chunk.js"
   },
   {
     "revision": "877979cf6e4479c389ae",
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/undeadblocks/static/media/amateur.0e7bc575.PNG"
   },
   {
-    "revision": "be63c73c0ab9bb51d6740c5b9fa29f48",
+    "revision": "212d81340effb33ddb5d2aa23b641d5c",
     "url": "/undeadblocks/index.html"
   }
 ];
