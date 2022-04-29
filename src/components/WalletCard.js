@@ -87,7 +87,7 @@ const WalletCard = () => {
         
             <div>
     
-                <button className="cybr-btn" onClick={ connectWalletHandler } variant='primary'>
+                <button className="cybr-btn enableEthereumButton" onClick={ connectWalletHandler } variant='primary'>
                     {btn_text}
                     <span aria-hidden>_</span>
                     <span aria-hidden className="cybr-btn__glitch"></span>
