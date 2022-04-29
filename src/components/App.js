@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import getWeb3 from "./getWeb3";
 import Web3 from 'web3';
 import "./App.css";
@@ -9,16 +9,95 @@ import add_icon from './images/add_icon.PNG';
 //import MetaMaskLoginButton from 'react-metamask-login-button';
 import WalletCard from './WalletCard';
 
+import Marketplace from '../abis/Marketplace.json';
+
 import amateur_bg from './images/amateur_bg.PNG';
 import survivor_bg from './images/survivor_bg.png';
 import assassin_bg from './images/assassin_bg.png';
 import z_killer from './images/z_killer.PNG';
+import { messagePrefix } from "@ethersproject/hash";
+
+
+
 
 class App extends Component {
   	state = { storageValue: 0, web3: null, accounts: null, contract: null };
-	
 
-	  
+	async UNSAFE_componentWillMount() {
+        await this.loadWeb3();
+        await this.loadBlockchainData();
+    }
+	constructor (props) {
+        super (props);
+        this.state = {
+            account: '',
+            productCount: 0,
+            products: [],
+            loading: true
+        };
+    }
+	
+    async loadWeb3() {
+        if (window.ethereum) {
+
+			
+            window.ethereum.autoRefreshOnNetworkChange = false;
+            window.web3 = new Web3(window.ethereum);
+            await window.ethereum.enable();
+        }
+        // legacy dapp browsers
+        else if (window.web3) {
+            window.web3 = new Web3(window.web3.currentProvider);
+        }
+        // non-dapp browsers ...
+        else {
+            window.alert("non-ethereum browser detected. consider trying metamask");
+        }
+    }
+
+	
+	async loadBlockchainData() {
+		const web3 = window.web3;
+
+        // load account
+        const accounts =  await web3.eth.getAccounts();
+        this.setState({ account: accounts[0] });
+        const netId = await web3.eth.net.getId();
+        const netData = Marketplace.networks[netId];
+
+        if (netData) {
+            const marketplace = web3.eth.Contract(Marketplace.abi, netData.address);
+            this.setState({ marketplace });
+
+            console.log(marketplace);
+        } else {
+            window.alert("error! Marketplace contract not deployed to detected network");
+        }
+        
+    }
+
+
+
+	buyAmateur = () => {
+		
+		var a_price = document.getElementById("a_text").getAttribute('value');
+		var BN = new BigNumber()
+		var a_priceETH = BN.from(a_price);
+
+		var firstAccount;
+		const web3 = window.web3;
+		web3.eth.getAccounts().then(e => { 
+			firstAccount = e[0];
+			console.log("A: " + firstAccount);
+		}) 
+
+        this.state.marketplace.methods.purchaseProduct(a_price).send({ from: firstAccount, value: a_priceETH }).once('receipt', (receipt) => {
+			this.setState({ loading: false });
+		});
+		alert(a_priceETH);
+	}
+
+	
   
 
   	render() {
@@ -90,7 +169,7 @@ class App extends Component {
 												
 												<img className="ban_i" src={ amateur_bg } alt="amateur weapon loadout" />
 												<div className="d_container">
-													<h3 className="w_price" id="a_text">
+													<h3 className="w_price" id="a_text" value="0.1">
 														0.1 ETH
 													</h3>
 													<p className="w_det">
@@ -98,7 +177,9 @@ class App extends Component {
 														<br />
 														<b className="w_det1">Playable in game</b>
 													</p>
-													<button id="button" className="noselect">Buy Now</button>
+													<button id="buy_amateur" className="noselect" onClick={ this.buyAmateur }>
+														Buy Now
+													</button>
 													
 												</div>
 											</div>
@@ -122,7 +203,7 @@ class App extends Component {
 														<br />
 														<b className="w_det1">Playable in game</b>
 													</p>
-													<button id="button" className="noselect">Buy Now</button>
+													<button id="buy_survivor" className="noselect">Buy Now</button>
 													
 												</div>
 											</div>
@@ -143,7 +224,7 @@ class App extends Component {
 														<br />
 														<b className="w_det1">Playable in game</b>
 													</p>
-													<button id="button" className="noselect">
+													<button id="buy_assassin" className="noselect">
 														Buy Now
 													</button>
 													
@@ -166,7 +247,7 @@ class App extends Component {
 														<br />
 														<b className="w_det1">Playable in game</b>
 													</p>
-													<button id="button" className="noselect">Buy Now</button>
+													<button id="buy_zkiller" className="noselect">Buy Now</button>
 													
 												</div>
 											</div>
@@ -213,7 +294,7 @@ class App extends Component {
 							</p>
 						</div>
 						<div className="item4">
-							<button className="button">
+							<button className="button" id="ra_btn">
 								<span>Read Article </span>
 							</button>
 						</div>
@@ -255,7 +336,6 @@ const scrollToTop = () => {
 		behavior: "smooth"
 	});
 };
-
 
 
 export default App;

@@ -1,5 +1,5 @@
-const SocialNetwork = artifacts.require("SocialNetwork");
+var Marketplace = artifacts.require("./Marketplace.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(SocialNetwork);
+  	deployer.deploy(Marketplace);
 };

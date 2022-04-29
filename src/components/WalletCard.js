@@ -1,36 +1,65 @@
 
 import React, { useState } from 'react';
 import { ethers } from "ethers";
+import { Button, Card } from "react-bootstrap";
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false
+
 
 const WalletCard = () => {
 
-    var { errMsg, setErrMsg } = useState(null);
-    var { defAcc, setDefAcc } = useState(null);
-    var { userBal, setUserBal } = useState(null);
-    
+    const [data, setdata] = useState({
+        address: "",
+        Balance: null,
+    });
 
-    const connectWalletHandler = () => {
-        if (window.ethereum) {
-            window.ethereum.request({ method: 'eth_requestAccounts' })
-            .then (result => {
-                accountChangeHandler(result[0])
-            })
-        } else {
-            setErrMsg = 'ERROR: MetaMask not installed/enabled'
-            alert(setErrMsg);
+    var IsLoggedIn=null;
+    var btn_text = "connect wallet";
+
+    const connectWalletHandler = (e) => {
+        e.preventDefault();
+        try{
+             // Asking if metamask is already present or not
+            if (window.ethereum) {
+        
+                // res[0] for fetching a first wallet
+                window.ethereum.request({ method: "eth_requestAccounts" })
+                .then((res) => accountChangeHandler(res[0]));
+                IsLoggedIn = true;
+            } else {
+                alert("install metamask extension!!");
+                IsLoggedIn = false;
+            }
+        } catch(error) {
+            alert(error);
         }
+       
     }
 
-    const accountChangeHandler = (newAccount) => {
-        setDefAcc(newAccount);
-        getUserBal(newAccount);
-    }
+    const accountChangeHandler = (account) => {
+        // Setting an address data
+        setdata({
+            address: account,
+        });
+      
+        // Setting a balance
+        getUserBal(account);
+        IsLoggedIn = true;
+    };
 
     const getUserBal = (address) => {
-        window.ethereum.request({ method: 'eth_getBalance', params: [address, 'latest'] })
-        .then (balance => {
-            setUserBal(ethers.utils.formatEther(balance));
-        })
+        // Requesting balance method
+        window.ethereum.request({ 
+            method: "eth_getBalance", 
+            params: [address, "latest"] 
+        }).then((balance) => {
+            // Setting balance
+            setdata({
+                Balance: ethers.utils.formatEther(balance),
+            });
+            btn_text = data.Balance;
+        });
     }
 
     const chainChangedHandler = () => {
@@ -38,19 +67,36 @@ const WalletCard = () => {
     }
 
     window.ethereum.on('accountsChanged', accountChangeHandler);
-    window.ethereum.on('chainChanged', chainChangedHandler);
+    //window.ethereum.on('chainChanged', chainChangedHandler);
 
-    return (
-        <div>
 
-            <button className="cybr-btn enableEthereumButton" onClick={ connectWalletHandler }>
-                Connect Wallet
-                <span aria-hidden>_</span>
-                <span aria-hidden className="cybr-btn__glitch"></span>
-                <span aria-hidden className="cybr-btn__tag">R25</span>
-            </button>
-        </div>
-    )
+    if (data.Balance != null) {
+        return (
+        
+                <div className="App">
+ 
+  
+                    <div className="text-center">                        
+                        <span className='u_bal'><i className="fa fa-check"></i> Wallet Connected... Bal: {data.Balance} ETH</span>
+                    </div>
+                </div>
+            
+        ) 
+    } else {
+        return (
+        
+            <div>
+    
+                <button className="cybr-btn" onClick={ connectWalletHandler } variant='primary'>
+                    {btn_text}
+                    <span aria-hidden>_</span>
+                    <span aria-hidden className="cybr-btn__glitch"></span>
+                    <span aria-hidden className="cybr-btn__tag">R25</span>
+                </button>
+            </div>
+        )
+    }
+    
 };
 
 export default WalletCard
