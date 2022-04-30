@@ -36,12 +36,12 @@ self.__precacheManifest = [
     "url": "/undeadblocks/static/media/udb.086fc202.png"
   },
   {
-    "revision": "0e7bc5750f71095e9d42c958aa2d0c4b",
-    "url": "/undeadblocks/static/media/amateur.0e7bc575.PNG"
-  },
-  {
     "revision": "118fd46f5dd181e185ceba4b177ecd7d",
     "url": "/undeadblocks/static/media/main_bg.118fd46f.jpg"
+  },
+  {
+    "revision": "0e7bc5750f71095e9d42c958aa2d0c4b",
+    "url": "/undeadblocks/static/media/amateur.0e7bc575.PNG"
   },
   {
     "revision": "fd5ab76ffffad19abd24c717890a50b9",
