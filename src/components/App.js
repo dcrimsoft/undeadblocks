@@ -12,9 +12,7 @@ import WalletCard from './WalletCard';
 
 import Marketplace from '../abis/Marketplace.json';
 import amateur_bg from './images/amateur_bg.PNG';
-import survivor_bg from './images/survivor_bg.png';
-import assassin_bg from './images/assassin_bg.png';
-import z_killer from './images/z_killer.PNG';
+
 import { messagePrefix } from "@ethersproject/hash";
 import Main from "./Main";
 

@@ -58,9 +58,9 @@ class Iv_admin extends Component {
         this.createWeapon = this.createWeapon.bind(this);
     }
 
-    createWeapon = (name, price) => {
+    createWeapon = (name, price, perks) => {
         this.setState({ loading: true });
-        this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account }).once('receipt', (receipt) => {
+        this.state.marketplace.methods.createProduct(name, price, perks).send({ from: this.state.account }).once('receipt', (receipt) => {
             this.setState({ loading: false });
         });
     }
@@ -79,7 +79,8 @@ class Iv_admin extends Component {
                             event.preventDefault()
                             const name = this.productName.value
                             const price = window.web3.utils.toWei(this.productPrice.value.toString(), 'Ether')
-                            this.createWeapon(name, price);
+                            const perks = this.weaponPerks.value
+                            this.createWeapon(name, price, perks);
                         } }>
                             <div className="form-group mr-sm-2">
                                 <input
@@ -98,6 +99,16 @@ class Iv_admin extends Component {
                                     ref={(input) => { this.productPrice = input }}
                                     className="form-control"
                                     placeholder="weapon price (in ether)"
+                                    required />
+                            </div>
+
+                            <div className="form-group mr-sm-2">
+                                <input
+                                    id="weaponPerks"
+                                    type="text"
+                                    ref={(input) => { this.weaponPerks = input }}
+                                    className="form-control"
+                                    placeholder="weapon perks"
                                     required />
                             </div>
 

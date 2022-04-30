@@ -10,6 +10,7 @@ contract Marketplace {
 		uint id;
 		string name;
 		uint price;
+		string perks;
 		address payable owner;
 		bool purchased;
 	}
@@ -18,6 +19,7 @@ contract Marketplace {
 		uint id,
 		string name,
 		uint price,
+		string perks,
 		address payable owner,
 		bool purchased
 	);
@@ -26,6 +28,7 @@ contract Marketplace {
 		uint id,
 		string name,
 		uint price,
+		string perks,
 		address payable owner,
 		bool purchased
 	);
@@ -34,10 +37,13 @@ contract Marketplace {
 		name = "DuaraCoin Marketplace";
 	}
 
-	function createProduct (string memory _name, uint _price) public {
+	function createProduct (string memory _name, uint _price, string memory _perks) public {
 
 		// require a valid name
 		require (bytes(_name).length > 1, "ERROR: invalid value for weapon name!");
+
+		// require a valid perk
+		require (bytes(_perks).length > 1, "ERROR: invalid value for weapon perks!");
 
 		// require a valid price
 		require (_price > 0, "ERROR: invalid value for weapon price!");
@@ -46,10 +52,10 @@ contract Marketplace {
 		productCount ++;
 
 		// create the product
-		products[productCount] = Product(productCount, _name, _price, msg.sender, false);
+		products[productCount] = Product(productCount, _name, _price, _perks, msg.sender, false);
 
 		// trigger an event
-		emit ProductCreated(productCount, _name, _price, msg.sender, false);
+		emit ProductCreated(productCount, _name, _price, _perks, msg.sender, false);
 	}
 
 	function purchaseProduct (uint _id) public payable {
@@ -81,7 +87,7 @@ contract Marketplace {
 		address(_seller).transfer(msg.value);
 
 		// trigger an event
-		emit ProductPurchased(productCount, _product.name, _product.price, msg.sender, true);
+		emit ProductPurchased(productCount, _product.name, _product.price, _product.perks, msg.sender, true);
 	}
 }
 

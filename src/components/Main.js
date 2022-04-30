@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import amateur_bg from './images/amateur_bg.PNG';
 import Marketplace from '../abis/Marketplace.json';
 import Web3 from 'web3';
+
+import amateur_bg from './images/amateur_bg.PNG';
+import survivor_bg from './images/survivor_bg.png';
+import assassin_bg from './images/assassin_bg.png';
+import z_killer from './images/z_killer.PNG';
 
 
 class Main extends Component {
@@ -87,6 +91,17 @@ class Main extends Component {
                                         } else {
                                             p_class = "carousel-item";
                                         }
+    
+                                        var weapon_img;
+                                        if (product.id.toString() === "1") {
+                                            weapon_img = amateur_bg;
+                                        } else if (product.id.toString() === "2") {
+                                            weapon_img = survivor_bg;
+                                        } else if (product.id.toString() === "3") {
+                                            weapon_img = assassin_bg;
+                                        } else if (product.id.toString() === "4") {
+                                            weapon_img = z_killer;
+                                        }
 
                                     return (
 
@@ -98,13 +113,13 @@ class Main extends Component {
                                                     </span>
 													<h5 className="card_title">{ product.name }</h5>
 													
-													<img className="ban_i" src={ amateur_bg } alt="amateur weapon loadout" />
+													<img className="ban_i" src={ weapon_img } alt="weapon loadout" />
 													<div className="d_container">
 														<h3 className="w_price" id="a_text" value="0.1">
                                                             {window.web3.utils.fromWei(product.price.toString(), 'Ether')} ETH
 														</h3>
 														<p className="w_det">
-															<b>Knife + Pistol</b>
+															<b>{ product.perks }</b>
 															<br />
 															<b className="w_det1">Playable in game</b>
 														</p>
