@@ -16,6 +16,7 @@ import survivor_bg from './images/survivor_bg.png';
 import assassin_bg from './images/assassin_bg.png';
 import z_killer from './images/z_killer.PNG';
 import { messagePrefix } from "@ethersproject/hash";
+import Main from "./Main";
 
 
 
@@ -35,6 +36,7 @@ class App extends Component {
             products: [],
             loading: true
         };
+		
     }
 	
     async loadWeb3() {
@@ -57,7 +59,8 @@ class App extends Component {
 
 	
 	async loadBlockchainData() {
-		const web3 = window.web3;
+
+        const web3 = window.web3;
 
         // load account
         const accounts =  await web3.eth.getAccounts();
@@ -68,7 +71,21 @@ class App extends Component {
         if (netData) {
             const marketplace = web3.eth.Contract(Marketplace.abi, netData.address);
             this.setState({ marketplace });
+            const productCount = await marketplace.methods.productCount().call();
+            console.log(productCount);
+            
+            this.setState({ productCount });
 
+            // load products
+            for (var i = 1; i <= productCount; i++) {
+                const product = await marketplace.methods.products(i).call();
+                this.setState({
+                    products: [...this.state.products, product]
+                });
+            }
+
+            this.setState({ loading: false });
+            console.log(this.state.products);
             console.log(marketplace);
         } else {
             window.alert("error! Marketplace contract not deployed to detected network");
@@ -76,7 +93,7 @@ class App extends Component {
         
     }
 
-
+	
 
 	
   
@@ -131,131 +148,40 @@ class App extends Component {
 					<div className="m_content">
 
 
+					<div className="c_slider">
+							<div className="slider_d">
+								<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel" data-interval="false">
+						
+						
 
+						
+                            { this.state.loading
+                                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> 
+                                : <Main
+                                    products={this.state.products}
+                                    createProduct={this.createProduct}
+                                    purchaseProduct={this.purchaseProduct} />
+                            }
+
+
+						</div>
+							</div>
+							
+						</div>
+
+
+
+					<div>
+                
+
+                                   
+            </div>
 
 
 
 
 					
-						<div className="c_slider">
-							<div className="slider_d">
-								<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel" data-interval="false">
-									
-									<div className="carousel-inner">              
-
-								
-
-
-										<div className="carousel-item active">
-											<div className="the_images">
-												<div className="card">
-													<h5 className="card_title">AMATEUR</h5>
-													
-													<img className="ban_i" src={ amateur_bg } alt="amateur weapon loadout" />
-													<div className="d_container">
-														<h3 className="w_price" id="a_text" value="0.1">
-															0.1 ETH
-														</h3>
-														<p className="w_det">
-															<b>Knife + Pistol</b>
-															<br />
-															<b className="w_det1">Playable in game</b>
-														</p>
-														<button id="buy_amateur" className="noselect" onClick={ this.buyAmateur }>
-															Buy Now
-														</button>
-														
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div className="carousel-item">
-											<div className="the_images">
-												<div className="card">
-													
-													<h5 className="card_title">
-														SURVIVOR
-													</h5>
-													<img className="ban_i" src={ survivor_bg } alt="survivor weapon loadout" id="surv_img" />
-													<div className="d_container" id='surv_d'>
-														<h3 className="w_price" id="survivor_text" >
-															0.3 ETH
-														</h3>
-														<p className="w_det">
-															<b>Knife + MP5 + Pistol</b>
-															<br />
-															<b className="w_det1">Playable in game</b>
-														</p>
-														<button id="buy_survivor" className="noselect">Buy Now</button>
-														
-													</div>
-												</div>
-											</div>
-										</div>
-										
-										<div className="carousel-item">
-											<div className="the_images">
-												<div className="card">
-													<h5 className="card_title">ASSASSIN</h5>
-													<img className="ban_i" src={ assassin_bg } alt="assassin weapon loadout" />
-													<div className="d_container" id="ass_d">
-														<h3 className="w_price" id="assassin_text">
-															0.5 ETH
-														</h3>
-														<p className="w_det">
-															<b>Knife + AK47 + Pistol + Shotgun + 1 random perk</b>
-															<br />
-															<b className="w_det1">Playable in game</b>
-														</p>
-														<button id="buy_assassin" className="noselect">
-															Buy Now
-														</button>
-														
-													</div>
-												</div>
-											</div>
-										</div>
-										
-										<div className="carousel-item">
-											<div className="the_images">
-												<div className="card">
-													<h5 className="card_title">ZOMBIE KILLER</h5>
-													<img className="ban_i" src={ z_killer } alt="zombie killer weapon loadout" />
-													<div className="d_container" id="zombie_d">
-														<h3 className="w_price" id="zkiller_text">
-															1 ETH
-														</h3>
-														<p className="w_det">
-															<b>Knife + F1 + Pistol + Shotgun + 4 perks + Grenade</b>
-															<br />
-															<b className="w_det1">Playable in game</b>
-														</p>
-														<button id="buy_zkiller" className="noselect">Buy Now</button>
-														
-													</div>
-												</div>
-											</div>
-										</div>
-
-
-
-
-
-										
-									</div>
-									<a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-										<span className="fa fa-chevron-left fa-lg" aria-hidden="true"></span>
-										<span className="sr-only">Previous</span>
-									</a>
-									<a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-										<span className="fa fa-chevron-right fa-lg" aria-hidden="true"></span>
-										<span className="sr-only">Next</span>
-									</a>
-								</div>
-							</div>
-							
-						</div>
+						
 
 
 

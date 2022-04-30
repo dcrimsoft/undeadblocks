@@ -29,20 +29,19 @@ contract Marketplace {
 		address payable owner,
 		bool purchased
 	);
-	
-	
 
 	constructor() public {
 		name = "DuaraCoin Marketplace";
 	}
 
 	function createProduct (string memory _name, uint _price) public {
+
 		// require a valid name
-		require (bytes(_name).length > 1);
-		
+		require (bytes(_name).length > 1, "ERROR: invalid value for weapon name!");
+
 		// require a valid price
-		require (_price > 0);		
-		
+		require (_price > 0, "ERROR: invalid value for weapon price!");
+
 		// increment product count
 		productCount ++;
 
@@ -52,8 +51,8 @@ contract Marketplace {
 		// trigger an event
 		emit ProductCreated(productCount, _name, _price, msg.sender, false);
 	}
-	
-	function purchaseProduct (uint _id) payable public {
+
+	function purchaseProduct (uint _id) public payable {
 		// fetch the product
 		Product memory _product = products[_id];
 
@@ -61,20 +60,17 @@ contract Marketplace {
 		address payable _seller = _product.owner;
 
 		// require that the product has a valid id
-		require (_product.id > 0 && _product.id <= productCount);
-		
-		// require that there is enough ether for the transaction
-		require (msg.value >= _product.price);
+		require (_product.id > 0 && _product.id <= productCount, "ERROR: invalid weapon id!");
 
-		// require that the product has not been purchased before
-		require (!_product.purchased);
-		
+		// require that there is enough ether for the transaction
+		require (msg.value >= _product.price, "ERROR: insufficient funds!");
+
 		// require that the buyer is not the seller
-		require (_seller != msg.sender);
+		require (_seller != msg.sender, "ERROR: this is the seller's account!");
 
 		// transfer product ownership to the buyer
 		_product.owner = msg.sender;
-		
+
 		// mark product as purchased
 		_product.purchased = true;
 
@@ -87,6 +83,5 @@ contract Marketplace {
 		// trigger an event
 		emit ProductPurchased(productCount, _product.name, _product.price, msg.sender, true);
 	}
-	
 }
 
