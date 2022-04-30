@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "b2cfe173d4ad572a007d",
-    "url": "/undeadblocks/static/css/main.2bd6ebb5.chunk.css"
+    "revision": "8e048182a425596e9fcb",
+    "url": "/undeadblocks/static/css/main.7db695c7.chunk.css"
   },
   {
-    "revision": "b2cfe173d4ad572a007d",
-    "url": "/undeadblocks/static/js/main.b2cfe173.chunk.js"
+    "revision": "8e048182a425596e9fcb",
+    "url": "/undeadblocks/static/js/main.8e048182.chunk.js"
   },
   {
     "revision": "482e2a7764fbf2805bc3",
@@ -36,12 +36,12 @@ self.__precacheManifest = [
     "url": "/undeadblocks/static/media/udb.086fc202.png"
   },
   {
-    "revision": "118fd46f5dd181e185ceba4b177ecd7d",
-    "url": "/undeadblocks/static/media/main_bg.118fd46f.jpg"
-  },
-  {
     "revision": "0e7bc5750f71095e9d42c958aa2d0c4b",
     "url": "/undeadblocks/static/media/amateur.0e7bc575.PNG"
+  },
+  {
+    "revision": "118fd46f5dd181e185ceba4b177ecd7d",
+    "url": "/undeadblocks/static/media/main_bg.118fd46f.jpg"
   },
   {
     "revision": "fd5ab76ffffad19abd24c717890a50b9",
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/undeadblocks/static/media/z_killer.aef0822e.PNG"
   },
   {
-    "revision": "92cc27e3ebe4243c7e379f0362798722",
+    "revision": "963d9c4e5153c2a04d729e6a8990c707",
     "url": "/undeadblocks/index.html"
   }
 ];
