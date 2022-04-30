@@ -86,6 +86,7 @@ class Main extends Component {
 								
                                     { this.props.products.map((product, key) => {
                                         var p_class;
+                                        
                                         if (product.id.toString() === "1") {
                                             p_class = "carousel-item active";
                                         } else {
@@ -93,13 +94,18 @@ class Main extends Component {
                                         }
     
                                         var weapon_img;
+                                        var price_font;
                                         if (product.id.toString() === "1") {
                                             weapon_img = amateur_bg;
+                                            price_font = "a_text";
                                         } else if (product.id.toString() === "2") {
                                             weapon_img = survivor_bg;
+                                            price_font = "survivor_text";
                                         } else if (product.id.toString() === "3") {
+                                            price_font = "assassin_text";
                                             weapon_img = assassin_bg;
                                         } else if (product.id.toString() === "4") {
+                                            price_font = "zkiller_text";
                                             weapon_img = z_killer;
                                         }
 
@@ -115,7 +121,7 @@ class Main extends Component {
 													
 													<img className="ban_i" src={ weapon_img } alt="weapon loadout" />
 													<div className="d_container">
-														<h3 className="w_price" id="a_text" value="0.1">
+														<h3 className="w_price" id={ price_font } value="0.1">
                                                             {window.web3.utils.fromWei(product.price.toString(), 'Ether')} ETH
 														</h3>
 														<p className="w_det">

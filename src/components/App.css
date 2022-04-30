@@ -536,24 +536,24 @@ width: 150px;
 }
 
 .cover::after {
-position: absolute;
-content: "";
-right: 100px;
-top: 0;
-z-index: 99;
-height: 100%;
-width: 150px;
+	position: absolute;
+	content: "";
+	right: 100px;
+	top: 0;
+	z-index: 99;
+	height: 100%;
+	width: 150px;
 }
 
 .scroll_items {
-width: 90%;
-height: auto;
-display: flex;
-align-items: center;
-justify-content: left;
-overflow: auto;
-position: relative;
-scroll-behavior: smooth;
+	width: 90%;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	overflow: auto;
+	position: relative;
+	scroll-behavior: smooth;
 }
 
 .child {
@@ -574,12 +574,12 @@ scroll-behavior: smooth;
 }
 
 .main_scroll_div {
-margin: 0 auto;
-width: 40%;
-height: 100%;
-display: flex;
-align-items: center;
-justify-content: space-between;
+	margin: 0 auto;
+	width: 40%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 

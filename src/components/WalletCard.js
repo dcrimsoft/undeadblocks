@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { ethers } from "ethers";
-import { Button, Card } from "react-bootstrap";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false
@@ -14,7 +13,6 @@ const WalletCard = () => {
         Balance: null,
     });
 
-    var IsLoggedIn=null;
     var btn_text = "connect wallet";
 
     const connectWalletHandler = (e) => {
@@ -26,10 +24,8 @@ const WalletCard = () => {
                 // res[0] for fetching a first wallet
                 window.ethereum.request({ method: "eth_requestAccounts" })
                 .then((res) => accountChangeHandler(res[0]));
-                IsLoggedIn = true;
             } else {
                 alert("install metamask extension!!");
-                IsLoggedIn = false;
             }
         } catch(error) {
             alert(error);
@@ -45,7 +41,6 @@ const WalletCard = () => {
       
         // Setting a balance
         getUserBal(account);
-        IsLoggedIn = true;
     };
 
     const getUserBal = (address) => {
