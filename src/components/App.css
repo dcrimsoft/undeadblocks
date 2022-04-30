@@ -680,6 +680,7 @@ justify-content: space-between;
 	color: #C81f32;
 	font-family: "Trebuchet MS", sans-serif;
 	margin-top: 30px;
+	text-transform: uppercase;
 }
 
 .d_container {

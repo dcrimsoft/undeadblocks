@@ -76,20 +76,27 @@ class Main extends Component {
                 <div className="c_slider">
 					<div className="slider_d">
 						<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel" data-interval="false">
-                                { this.props.products.map((product, key) => {
-                                return (
+                                
 									<div className="carousel-inner">              
 
 								
+                                    { this.props.products.map((product, key) => {
+                                        var p_class;
+                                        if (product.id.toString() === "1") {
+                                            p_class = "carousel-item active";
+                                        } else {
+                                            p_class = "carousel-item";
+                                        }
 
+                                    return (
 
-										<div className="carousel-item active">
+										<div key={key} className={ p_class }>
 											<div className="the_images">
 												<div className="card">
                                                     <span className='id_span'>
                                                     {product.id.toString()}
                                                     </span>
-													<h5 className="card_title">AMATEUR</h5>
+													<h5 className="card_title">{ product.name }</h5>
 													
 													<img className="ban_i" src={ amateur_bg } alt="amateur weapon loadout" />
 													<div className="d_container">
@@ -116,11 +123,12 @@ class Main extends Component {
 												</div>
 											</div>
 										</div>
-										
+										)
+                                    }) }
 									</div>
 
-                                    )
-                                }) } 
+                                    
+                                 
 
 
 									<a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
