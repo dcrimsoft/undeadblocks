@@ -48,15 +48,15 @@ self.__precacheManifest = [
     "url": "/undeadblocks/static/media/z_killer.aef0822e.PNG"
   },
   {
-    "revision": "0e7bc5750f71095e9d42c958aa2d0c4b",
-    "url": "/undeadblocks/static/media/amateur.0e7bc575.PNG"
-  },
-  {
     "revision": "118fd46f5dd181e185ceba4b177ecd7d",
     "url": "/undeadblocks/static/media/main_bg.118fd46f.jpg"
   },
   {
-    "revision": "639c1a49136ca6b598b90c44a87e115b",
+    "revision": "0e7bc5750f71095e9d42c958aa2d0c4b",
+    "url": "/undeadblocks/static/media/amateur.0e7bc575.PNG"
+  },
+  {
+    "revision": "68ee3cc498eff2132ee59ab0310d66e8",
     "url": "/undeadblocks/index.html"
   }
 ];
