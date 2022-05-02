@@ -115,14 +115,14 @@ class Main extends Component {
 											<div className="the_images">
 												<div className="card">
                                                     <span className='id_span'>
-                                                    {product.id.toString()}
+                                                    { product.id.toString() }
                                                     </span>
 													<h5 className="card_title">{ product.name }</h5>
 													
 													<img className="ban_i" src={ weapon_img } alt="weapon loadout" />
 													<div className="d_container">
 														<h3 className="w_price" id={ price_font } value="0.1">
-                                                            {window.web3.utils.fromWei(product.price.toString(), 'Ether')} ETH
+                                                            { window.web3.utils.fromWei(product.price.toString(), 'Ether') } ETH
 														</h3>
 														<p className="w_det">
 															<b>{ product.perks }</b>
@@ -131,8 +131,8 @@ class Main extends Component {
 														</p>
 														<button 
                                                             className="btn btn1"
-                                                            name={product.id}
-                                                            value={product.price}
+                                                            name={ product.id }
+                                                            value={ product.price }
                                                             onClick={ (event) => {
                                                                 this.purchaseProduct(event.target.name, event.target.value)
                                                             } }

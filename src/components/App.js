@@ -11,9 +11,6 @@ import add_icon from './images/add_icon.PNG';
 import WalletCard from './WalletCard';
 
 import Marketplace from '../abis/Marketplace.json';
-import amateur_bg from './images/amateur_bg.PNG';
-
-import { messagePrefix } from "@ethersproject/hash";
 import Main from "./Main";
 
 

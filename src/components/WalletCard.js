@@ -61,8 +61,13 @@ const WalletCard = () => {
         window.location.reload();
     }
 
-    window.ethereum.on('accountsChanged', accountChangeHandler);
-    //window.ethereum.on('chainChanged', chainChangedHandler);
+    try {
+        window.ethereum.on('accountsChanged', accountChangeHandler);
+        window.ethereum.on('chainChanged', chainChangedHandler);
+    } catch (err) {
+        alert(err.msg);
+    }
+    
 
 
     if (data.Balance != null) {
